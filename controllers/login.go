@@ -31,6 +31,9 @@ func (t *LoginController) Index(c *gin.Context) {
     store.Set("userinfo", gin.H{
         "user_id": 10008,
     })
+    if err := store.Save(); err != nil {
+        panic(err)
+    }
 
     // 跳转到登录成功页
     c.Redirect(http.StatusMovedPermanently, "/foo")

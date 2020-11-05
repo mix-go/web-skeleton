@@ -20,14 +20,21 @@ func init() {
         router.Any("users/add",
             middleware.SessionMiddleware(),
             func(ctx *gin.Context) {
-                hello := controllers.UserController{}
-                hello.Add(ctx)
+                user := controllers.UserController{}
+                user.Add(ctx)
             },
         )
 
         router.Any("login", func(ctx *gin.Context) {
-            auth := controllers.LoginController{}
-            auth.Index(ctx)
+            login := controllers.LoginController{}
+            login.Index(ctx)
         })
+
+        router.GET("websocket",
+            func(ctx *gin.Context) {
+                ws := controllers.WebSocketController{}
+                ws.Index(ctx)
+            },
+        )
     })
 }

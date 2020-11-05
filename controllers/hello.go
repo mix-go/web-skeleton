@@ -10,6 +10,6 @@ type HelloController struct {
 
 func (t *HelloController) Index(c *gin.Context) {
     c.HTML(http.StatusOK, "index.tmpl", gin.H{
-        "title": "Main website",
+        "title": "Hello, World!",
     })
 }

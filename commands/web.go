@@ -63,6 +63,10 @@ func (t *WebCommand) Main() {
     // templates
     router.LoadHTMLGlob(fmt.Sprintf("%s/../templates/*", console.App.BasePath))
 
+    // static file
+    router.Static("/static", fmt.Sprintf("%s/../public/static", console.App.BasePath))
+    router.StaticFile("/favicon.ico", fmt.Sprintf("%s/../public/favicon.ico", console.App.BasePath))
+
     // run
     welcome()
     logger.Info("Server start")

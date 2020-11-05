@@ -4,6 +4,7 @@ import (
     "context"
     "fmt"
     gin2 "github.com/gin-gonic/gin"
+    "github.com/mix-go/console"
     "github.com/mix-go/console/flag"
     "github.com/mix-go/dotenv"
     "github.com/mix-go/gin"
@@ -58,6 +59,9 @@ func (t *APICommand) Main() {
             params.ClientIP,
         )
     }))
+
+    // templates
+    router.LoadHTMLGlob(fmt.Sprintf("%s/../templates/*", console.App.BasePath))
 
     // run
     welcome()

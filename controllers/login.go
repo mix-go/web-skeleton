@@ -1,41 +1,37 @@
 package controllers
 
 import (
-    "github.com/dgrijalva/jwt-go"
+    "context"
     "github.com/gin-gonic/gin"
-    "github.com/mix-go/dotenv"
+    "github.com/go-session/session"
     "net/http"
-    "time"
 )
 
 type LoginController struct {
 }
 
 func (t *LoginController) Index(c *gin.Context) {
+    // 网页
+    if c.Request.Method == http.MethodGet {
+        c.HTML(http.StatusOK, "index.tmpl", gin.H{
+            "title": "Login",
+        })
+        c.Abort()
+        return
+    }
+
     // 检查用户登录代码
     // ...
 
-    // 创建 token
-    now := time.Now().Unix()
-    token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-        "iss": "http://example.org",                                  // 签发人
-        "iat": now,                                                   // 签发时间
-        "exp": now + int64(7200),                                     // 过期时间
-        "nbf": time.Date(2015, 10, 10, 12, 0, 0, 0, time.UTC).Unix(), // 什么时间之前不可用
-        "uid": 100008,
-    })
-    tokenString, err := token.SignedString([]byte(dotenv.Getenv("HMAC_SECRET").String()))
+    // session
+    store, err := session.Start(context.Background(), c.Writer, c.Request)
     if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{
-            "status":  http.StatusInternalServerError,
-            "message": "Creation of token fails",
-        })
+        panic(err)
     }
-
-    c.JSON(http.StatusOK, gin.H{
-        "status":       http.StatusOK,
-        "message":      "ok",
-        "access_token": tokenString,
-        "expire_in":    7200,
+    store.Set("userinfo", gin.H{
+        "user_id": 10008,
     })
+
+    // 跳转到登录成功页
+    c.Redirect(http.StatusMovedPermanently, "/foo")
 }

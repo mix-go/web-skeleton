@@ -13,7 +13,7 @@ func SessionMiddleware() gin.HandlerFunc {
             panic(err)
         }
 
-        _, ok := store.Get("user_id")
+        _, ok := store.Get("userinfo")
         if !ok {
             c.Status(401)
             c.Abort()

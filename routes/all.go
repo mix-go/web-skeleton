@@ -17,15 +17,7 @@ func init() {
             },
         )
 
-        router.GET("users/add",
-            middleware.SessionMiddleware(),
-            func(ctx *gin.Context) {
-                hello := controllers.UserController{}
-                hello.Add(ctx)
-            },
-        )
-
-        router.POST("users/save",
+        router.Any("users/add",
             middleware.SessionMiddleware(),
             func(ctx *gin.Context) {
                 hello := controllers.UserController{}

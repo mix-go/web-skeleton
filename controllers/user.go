@@ -12,37 +12,21 @@ type UserController struct {
 }
 
 func (t *UserController) Add(c *gin.Context) {
-    db := globals.DB()
-    if err := db.Create(&models.User{
-        Name:     c.Request.PostFormValue("name"),
-        CreateAt: time.Now(),
-    }).Error; err != nil {
-        c.JSON(http.StatusOK, gin.H{
-            "status":  http.StatusInternalServerError,
-            "message": err.Error(),
+    // 网页
+    if c.Request.Method == http.MethodGet {
+        c.HTML(http.StatusOK, "user_add.tmpl", gin.H{
+            "title": "User add",
         })
+        c.Abort()
         return
     }
-    c.JSON(http.StatusOK, gin.H{
-        "status":  http.StatusOK,
-        "message": "ok",
-    })
-}
 
-func (t *UserController) Save(c *gin.Context) {
     db := globals.DB()
     if err := db.Create(&models.User{
         Name:     c.Request.PostFormValue("name"),
         CreateAt: time.Now(),
     }).Error; err != nil {
-        c.JSON(http.StatusOK, gin.H{
-            "status":  http.StatusInternalServerError,
-            "message": err.Error(),
-        })
-        return
+        panic(err)
     }
-    c.JSON(http.StatusOK, gin.H{
-        "status":  http.StatusOK,
-        "message": "ok",
-    })
+    c.String(http.StatusOK, "Add ok!")
 }

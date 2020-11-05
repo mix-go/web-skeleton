@@ -1,4 +1,4 @@
-package api
+package routes
 
 import (
     "github.com/gin-gonic/gin"
@@ -11,23 +11,30 @@ var RouteDefinitionCallbacks []func(router *gin.Engine)
 func init() {
     RouteDefinitionCallbacks = append(RouteDefinitionCallbacks, func(router *gin.Engine) {
         router.GET("hello",
-            middleware.CorsMiddleware(),
             func(ctx *gin.Context) {
                 hello := controllers.HelloController{}
                 hello.Index(ctx)
             },
         )
 
-        router.POST("users/add",
-            middleware.CorsMiddleware(),
+        router.GET("users/add",
+            middleware.SessionMiddleware(),
             func(ctx *gin.Context) {
-                hello := controllers.AddUserController{}
-                hello.Index(ctx)
+                hello := controllers.UserController{}
+                hello.Add(ctx)
             },
         )
 
-        router.POST("auth", func(ctx *gin.Context) {
-            auth := controllers.AuthController{}
+        router.POST("users/save",
+            middleware.SessionMiddleware(),
+            func(ctx *gin.Context) {
+                hello := controllers.UserController{}
+                hello.Add(ctx)
+            },
+        )
+
+        router.Any("login", func(ctx *gin.Context) {
+            auth := controllers.LoginController{}
             auth.Index(ctx)
         })
     })

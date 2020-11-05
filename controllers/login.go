@@ -8,10 +8,10 @@ import (
     "time"
 )
 
-type AuthController struct {
+type LoginController struct {
 }
 
-func (t *AuthController) Index(c *gin.Context) {
+func (t *LoginController) Index(c *gin.Context) {
     // 检查用户登录代码
     // ...
 

@@ -8,7 +8,7 @@ import (
     "github.com/mix-go/dotenv"
     "github.com/mix-go/gin"
     "github.com/mix-go/web-skeleton/globals"
-    "github.com/mix-go/web-skeleton/routes/api"
+    "github.com/mix-go/web-skeleton/routes"
     "net/http"
     "os"
     "os/signal"
@@ -25,10 +25,9 @@ type APICommand struct {
 func (t *APICommand) Main() {
     logger := globals.Logger()
 
-    gin.SetMode(dotenv.Getenv("GIN_MODE").String(gin.ReleaseMode))
-
     // server
-    router := gin.New(api.RouteDefinitionCallbacks...)
+    gin.SetMode(dotenv.Getenv("GIN_MODE").String(gin.ReleaseMode))
+    router := gin.New(routes.RouteDefinitionCallbacks...)
     srv := &http.Server{
         Addr:    flag.Match("a", "addr").String(Addr),
         Handler: router,

@@ -20,10 +20,10 @@ import (
 
 const Addr = ":8080"
 
-type APICommand struct {
+type WebCommand struct {
 }
 
-func (t *APICommand) Main() {
+func (t *WebCommand) Main() {
     logger := globals.Logger()
 
     // server

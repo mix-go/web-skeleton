@@ -17,8 +17,8 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/go-redis/redis/v8 v8.0.0-beta.7
-	github.com/go-session/redis v3.0.1+incompatible // indirect
-	github.com/go-session/session v3.1.2+incompatible // indirect
+	github.com/go-session/redis v3.0.1+incompatible
+	github.com/go-session/session v3.1.2+incompatible
 	github.com/jinzhu/configor v1.2.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/mix-go/bean v1.0.16

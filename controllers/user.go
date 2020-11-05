@@ -26,7 +26,9 @@ func (t *UserController) Add(c *gin.Context) {
         Name:     c.Request.PostFormValue("name"),
         CreateAt: time.Now(),
     }).Error; err != nil {
-        panic(err)
+        c.String(http.StatusInternalServerError, "<html><h1>%s</h1></html>", "Add error!")
+        c.Abort()
+        return
     }
-    c.String(http.StatusOK, "Add ok!")
+    c.String(http.StatusInternalServerError, "<html><h1>%s</h1></html>", "Add ok!")
 }

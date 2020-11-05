@@ -13,7 +13,7 @@ type LoginController struct {
 func (t *LoginController) Index(c *gin.Context) {
     // 网页
     if c.Request.Method == http.MethodGet {
-        c.HTML(http.StatusOK, "index.tmpl", gin.H{
+        c.HTML(http.StatusOK, "login.tmpl", gin.H{
             "title": "Login",
         })
         c.Abort()

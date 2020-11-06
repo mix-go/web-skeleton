@@ -14,4 +14,5 @@ func Init() {
     Event()
     Log()
     Redis()
+    Session()
 }

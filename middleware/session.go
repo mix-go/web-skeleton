@@ -3,11 +3,12 @@ package middleware
 import (
     "context"
     "github.com/gin-gonic/gin"
-    "github.com/go-session/session"
+    "github.com/mix-go/web-skeleton/globals"
 )
 
 func SessionMiddleware() gin.HandlerFunc {
     return func(c *gin.Context) {
+        session := globals.Session()
         store, err := session.Start(context.Background(), c.Writer, c.Request)
         if err != nil {
             panic(err)

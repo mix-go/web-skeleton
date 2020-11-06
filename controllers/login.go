@@ -37,5 +37,5 @@ func (t *LoginController) Index(c *gin.Context) {
     }
 
     // 跳转到登录成功页
-    c.Redirect(http.StatusMovedPermanently, "/foo")
+    c.Redirect(http.StatusMovedPermanently, "/users/add")
 }

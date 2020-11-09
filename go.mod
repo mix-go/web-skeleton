@@ -22,12 +22,12 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/jinzhu/configor v1.2.0
 	github.com/jinzhu/gorm v1.9.16
-	github.com/mix-go/bean v1.0.16
-	github.com/mix-go/console v1.0.19
-	github.com/mix-go/dotenv v1.0.16
-	github.com/mix-go/event v1.0.16
-	github.com/mix-go/gin v1.0.19
-	github.com/mix-go/logrus v1.0.19
+	github.com/mix-go/bean v1.0.21
+	github.com/mix-go/console v1.0.21
+	github.com/mix-go/dotenv v1.0.21
+	github.com/mix-go/event v1.0.21
+	github.com/mix-go/gin v1.0.21
+	github.com/mix-go/logrus v1.0.21
 	github.com/sirupsen/logrus v1.6.0
 	github.com/ugorji/go v1.1.13 // indirect
 	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897 // indirect

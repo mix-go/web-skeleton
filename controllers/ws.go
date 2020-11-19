@@ -37,6 +37,12 @@ func (t *WebSocketController) Index(c *gin.Context) {
         Send:   make(chan []byte, 100),
     }
     session.Start()
+
+    srv := globals.Server
+    srv.RegisterOnShutdown(func() {
+        session.Stop()
+    })
+
     logger.Infof("Upgrade: %s", c.Request.UserAgent())
 }
 

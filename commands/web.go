@@ -33,6 +33,7 @@ func (t *WebCommand) Main() {
         Addr:    flag.Match("a", "addr").String(Addr),
         Handler: router,
     }
+    globals.Server = srv
 
     // signal
     ch := make(chan os.Signal)
@@ -40,10 +41,9 @@ func (t *WebCommand) Main() {
     go func() {
         <-ch
         logger.Info("Server shutdown")
-        ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-        defer cancel()
+        ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
         if err := srv.Shutdown(ctx); err != nil {
-            globals.Logger().Errorf("Server shutdown error: %s", err)
+            logger.Errorf("Server shutdown error: %s", err)
         }
     }()
 

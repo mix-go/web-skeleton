@@ -91,6 +91,12 @@ func (t *WebSocketSession) Start() {
 }
 
 func (t *WebSocketSession) Stop() {
+    defer func() {
+        if err := recover(); err != nil {
+            logger := globals.Logger()
+            logger.Error(err)
+        }
+    }()
     close(t.Send)
     _ = t.Conn.Close()
 }

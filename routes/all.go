@@ -6,8 +6,10 @@ import (
     "github.com/mix-go/web-skeleton/middleware"
 )
 
-func RouteDefinitionCallbacks() (callbacks []func(router *gin.Engine)) {
-    callbacks = append(callbacks, func(router *gin.Engine) {
+func WebDefinition() func(router *gin.Engine) {
+    return func(router *gin.Engine) {
+        router.Use(gin.Recovery()) // error handle
+
         router.GET("hello",
             func(ctx *gin.Context) {
                 hello := controllers.HelloController{}
@@ -34,6 +36,5 @@ func RouteDefinitionCallbacks() (callbacks []func(router *gin.Engine)) {
                 ws.Index(ctx)
             },
         )
-    })
-    return
+    }
 }

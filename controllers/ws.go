@@ -17,7 +17,7 @@ type WebSocketController struct {
 }
 
 func (t *WebSocketController) Index(c *gin.Context) {
-    logger := globals.Logger()
+    logger := globals.Logrus()
     if console.App.Debug {
         upgrader.CheckOrigin = func(r *http.Request) bool {
             return true
@@ -54,7 +54,7 @@ type WebSocketSession struct {
 
 func (t *WebSocketSession) Start() {
     go func() {
-        logger := globals.Logger()
+        logger := globals.Logrus()
         for {
             msgType, msg, err := t.Conn.ReadMessage()
             if err != nil {
@@ -75,7 +75,7 @@ func (t *WebSocketSession) Start() {
         }
     }()
     go func() {
-        logger := globals.Logger()
+        logger := globals.Logrus()
         for {
             msg, ok := <-t.Send
             if !ok {
@@ -93,7 +93,7 @@ func (t *WebSocketSession) Start() {
 func (t *WebSocketSession) Stop() {
     defer func() {
         if err := recover(); err != nil {
-            logger := globals.Logger()
+            logger := globals.Logrus()
             logger.Error(err)
         }
     }()

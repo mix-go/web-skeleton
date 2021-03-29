@@ -21,7 +21,7 @@ func (t *UserController) Add(c *gin.Context) {
         return
     }
 
-    db := globals.DB()
+    db := globals.Gorm()
     if err := db.Create(&models.User{
         Name:     c.Request.PostFormValue("name"),
         CreateAt: time.Now(),

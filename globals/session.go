@@ -1,10 +1,13 @@
 package globals
 
 import (
-    "github.com/go-session/session"
-    "github.com/mix-go/console"
+	"github.com/go-session/session"
+	"github.com/mix-go/xdi"
 )
 
-func Session() *session.Manager {
-    return console.App.Get("session").(*session.Manager)
+func Session() (manager *session.Manager) {
+	if err := xdi.Populate("session", &manager); err != nil {
+		panic(err)
+	}
+	return
 }

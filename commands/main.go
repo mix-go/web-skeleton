@@ -7,7 +7,7 @@ import (
 var Commands = []*xcli.Command{
 	{
 		Name:  "web",
-		Usage: "\tStart the api server",
+		Usage: "\tStart the web server",
 		Options: []*xcli.Option{
 			{
 				Names: []string{"a", "addr"},

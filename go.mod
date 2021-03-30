@@ -23,7 +23,7 @@ require (
 	github.com/lestrrat-go/strftime v1.0.4 // indirect
 	github.com/mix-go/console v1.0.24
 	github.com/mix-go/dotenv v1.0.22
-	github.com/mix-go/xcli v1.1.1
+	github.com/mix-go/xcli v1.1.2
 	github.com/mix-go/xdi v1.1.1
 	github.com/sirupsen/logrus v1.6.0
 	github.com/smartystreets/goconvey v1.6.4 // indirect

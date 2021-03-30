@@ -3,7 +3,7 @@ package controllers
 import (
     "github.com/gin-gonic/gin"
     "github.com/gorilla/websocket"
-    "github.com/mix-go/console"
+	"github.com/mix-go/xcli"
     "github.com/mix-go/web-skeleton/globals"
     "net/http"
 )
@@ -18,7 +18,7 @@ type WebSocketController struct {
 
 func (t *WebSocketController) Index(c *gin.Context) {
     logger := globals.Logrus()
-    if console.App.Debug {
+    if xcli.App().Debug {
         upgrader.CheckOrigin = func(r *http.Request) bool {
             return true
         }

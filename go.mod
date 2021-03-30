@@ -21,10 +21,10 @@ require (
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.4 // indirect
-	github.com/mix-go/console v1.0.24
 	github.com/mix-go/dotenv v1.0.22
 	github.com/mix-go/xcli v1.1.2
 	github.com/mix-go/xdi v1.1.1
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/ugorji/go v1.1.13 // indirect

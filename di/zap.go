@@ -7,7 +7,6 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"io"
 	"os"
 	"time"
 )
@@ -21,8 +20,6 @@ func init() {
 				Filename:   filename,
 				MaxBackups: 7,
 			}
-			writer := io.MultiWriter(os.Stdout, fileRotate)
-			w := zapcore.AddSync(writer)
 			core := zapcore.NewCore(
 				zapcore.NewConsoleEncoder(zapcore.EncoderConfig{
 					TimeKey:       "T",
@@ -39,7 +36,7 @@ func init() {
 					EncodeDuration: zapcore.StringDurationEncoder,
 					EncodeCaller:   zapcore.ShortCallerEncoder,
 				}),
-				zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), w),
+				zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(fileRotate)),
 				zap.InfoLevel,
 			)
 			logger := zap.New(core, zap.AddCaller())

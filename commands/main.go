@@ -7,15 +7,15 @@ import (
 var Commands = []*xcli.Command{
 	{
 		Name:  "web",
-		Usage: "\tStart the web server",
+		Short: "\tStart the web server",
 		Options: []*xcli.Option{
 			{
 				Names: []string{"a", "addr"},
-				Usage: "\tListen to the specified address",
+				Short: "\tListen to the specified address",
 			},
 			{
 				Names: []string{"d", "daemon"},
-				Usage: "\tRun in the background",
+				Short: "\tRun in the background",
 			},
 		},
 		RunI: &WebCommand{},

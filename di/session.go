@@ -27,3 +27,10 @@ func init() {
 		panic(err)
 	}
 }
+
+func Session() (manager *session.Manager) {
+	if err := xdi.Populate("session", &manager); err != nil {
+		panic(err)
+	}
+	return
+}

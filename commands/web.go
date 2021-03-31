@@ -5,12 +5,11 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/mix-go/dotenv"
-	"github.com/mix-go/web-skeleton/globals"
+	"github.com/mix-go/web-skeleton/di"
 	"github.com/mix-go/web-skeleton/routes"
 	"github.com/mix-go/xcli"
 	"github.com/mix-go/xcli/flag"
 	"github.com/mix-go/xcli/process"
-	"net/http"
 	"os"
 	"os/signal"
 	"strings"
@@ -26,7 +25,8 @@ func (t *WebCommand) Main() {
 		process.Daemon()
 	}
 
-	logger := globals.Logrus()
+	logger := di.Logrus()
+	server := di.Server()
 	addr := dotenv.Getenv("GIN_ADDR").String(":8080")
 	mode := dotenv.Getenv("GIN_MODE").String(gin.ReleaseMode)
 
@@ -34,11 +34,8 @@ func (t *WebCommand) Main() {
 	gin.SetMode(mode)
 	router := gin.New()
 	routes.SetRoutes(router)
-	srv := &http.Server{
-		Addr:    flag.Match("a", "addr").String(addr),
-		Handler: router,
-	}
-	globals.Server = srv
+	server.Addr = flag.Match("a", "addr").String(addr)
+	server.Handler = router
 
 	// signal
 	ch := make(chan os.Signal)
@@ -47,7 +44,7 @@ func (t *WebCommand) Main() {
 		<-ch
 		logger.Info("Server shutdown")
 		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-		if err := srv.Shutdown(ctx); err != nil {
+		if err := server.Shutdown(ctx); err != nil {
 			logger.Errorf("Server shutdown error: %s", err)
 		}
 	}()
@@ -77,8 +74,8 @@ func (t *WebCommand) Main() {
 
 	// run
 	welcome()
-	logger.Infof("Server start at %s", srv.Addr)
-	if err := srv.ListenAndServe(); err != nil && !strings.Contains(err.Error(), "http: Server closed") {
+	logger.Infof("Server start at %s", server.Addr)
+	if err := server.ListenAndServe(); err != nil && !strings.Contains(err.Error(), "http: Server closed") {
 		panic(err)
 	}
 }

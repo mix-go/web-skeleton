@@ -4,12 +4,15 @@ import (
 	"fmt"
 	"github.com/jinzhu/configor"
 	"github.com/mix-go/xcli/argv"
-	"github.com/mix-go/web-skeleton/globals"
 )
 
-func init()  {
+var Config = struct {
+	Foo string
+}{}
+
+func init() {
 	// Conf support YAML, JSON, TOML, Shell Environment
-	if err := configor.Load(&globals.Config, fmt.Sprintf("%s/../conf/config.yml", argv.Program().Dir)); err != nil {
+	if err := configor.Load(&Config, fmt.Sprintf("%s/../conf/config.yml", argv.Program().Dir)); err != nil {
 		panic(err)
 	}
 }

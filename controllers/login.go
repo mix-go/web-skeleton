@@ -3,7 +3,7 @@ package controllers
 import (
     "context"
     "github.com/gin-gonic/gin"
-    "github.com/mix-go/web-skeleton/globals"
+    "github.com/mix-go/web-skeleton/di"
     "net/http"
 )
 
@@ -24,7 +24,7 @@ func (t *LoginController) Index(c *gin.Context) {
     // ...
 
     // session
-    session := globals.Session()
+    session := di.Session()
     store, err := session.Start(context.Background(), c.Writer, c.Request)
     if err != nil {
         panic(err)

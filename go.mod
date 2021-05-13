@@ -19,9 +19,9 @@ require (
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/jinzhu/configor v1.2.0
-	github.com/mix-go/dotenv v1.0.22
+	github.com/mix-go/dotenv v1.1.11
 	github.com/mix-go/xcli v1.1.10
-	github.com/mix-go/xdi v1.1.5
+	github.com/mix-go/xdi v1.1.11
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/smartystreets/goconvey v1.6.4 // indirect

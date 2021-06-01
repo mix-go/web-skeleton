@@ -33,6 +33,21 @@ func (t *WebCommand) Main() {
 	// server
 	gin.SetMode(mode)
 	router := gin.New()
+	// logger
+	if mode != gin.ReleaseMode {
+		handlerFunc := gin.LoggerWithConfig(gin.LoggerConfig{
+			Formatter: func(params gin.LogFormatterParams) string {
+				return fmt.Sprintf("%s|%s|%d|%s",
+					params.Method,
+					params.Path,
+					params.StatusCode,
+					params.ClientIP,
+				)
+			},
+			Output: logger.Writer(),
+		})
+		router.Use(handlerFunc)
+	}
 	routes.SetRoutes(router)
 	server.Addr = flag.Match("a", "addr").String(addr)
 	server.Handler = router
@@ -48,22 +63,6 @@ func (t *WebCommand) Main() {
 			logger.Errorf("Server shutdown error: %s", err)
 		}
 	}()
-
-	// logger
-	if mode != gin.ReleaseMode {
-		handlerFunc := gin.LoggerWithConfig(gin.LoggerConfig{
-			Formatter: func(params gin.LogFormatterParams) string {
-				return fmt.Sprintf("%s|%s|%d|%s",
-					params.Method,
-					params.Path,
-					params.StatusCode,
-					params.ClientIP,
-				)
-			},
-			Output: logger.Out,
-		})
-		router.Use(handlerFunc)
-	}
 
 	// templates
 	router.LoadHTMLGlob(fmt.Sprintf("%s/../templates/*", xcli.App().BasePath))

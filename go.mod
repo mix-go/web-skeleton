@@ -19,7 +19,6 @@ require (
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/jinzhu/configor v1.2.0
-	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/mix-go/dotenv v1.1.11
 	github.com/mix-go/xcli v1.1.11
 	github.com/mix-go/xdi v1.1.11

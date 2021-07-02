@@ -48,7 +48,7 @@ func (t *WebCommand) Main() {
 		})
 		router.Use(handlerFunc)
 	}
-	routes.SetRoutes(router)
+	routes.Load(router)
 	server.Addr = flag.Match("a", "addr").String(addr)
 	server.Handler = router
 
